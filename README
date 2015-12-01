@@ -1,0 +1,61 @@
+CFSR Request, Download, and Pre-Processing Program
+--------------------------------------------------
+
+	This program requests and downloads CFSR data, that is then 
+	converted to GRIB (version 1) via convert_2_grib scripts. The 
+	version 1 GRIB files are then ready to be pre-processed by 
+	WPS. Unfortunately, there is a great deal of babysitting this 
+	program while it runs, unlike downloading ERA-Interim data. 
+	Currently, this is the most automated and quickest retrieval 
+	version that I have developed to obtain CFSR data.
+
+	It is strongly recommended to use version 1 GRIB files as 
+	version 2 files are pre-processed significantly slower by WPS, 
+	and WPS version 3.2 is not set up to work with version 2 GRIB.
+
+	NCEP CFSR archived data has some corruption of data, so it is 
+	strongly recommended the user checks for corruption before 
+	pre-processing the data in WPS. This may simply be done by 
+	checking the log files of data being output from 
+	convert_2_grib scripts - corrupt data will not be converted, 
+	and will result in an error being output.
+
+	It is always recommended to check that all files were 
+	successfully downloaded as the hardware systems tend to have 
+	hiccups, resulting in failed downloads. It is good practice 
+	to check both the number of files (ls -1 *.grb2 | wc -l) and 
+	file sizes (for each f in *.grb2; do du -h $f ;done).
+
+	There is a maximum of 10 requests/time. To view and delete 
+	requests, log in to the archive at 
+	rda.ucar.edu/datasets/ds093.0 and navigate to your Dashboard. 
+	After 10 requests have been submitted, the user will need to 
+	download the data. Further requests may then be made. The 
+	batchreq.sh and batchdl.sh scripts allow data to be requested 
+	and downloaded in sets not exceeding 10/time by adjusting the 
+	"FIRSTPASS" flag.
+
+How to use this program:
+
+        1.  batchreq.sh - This program requests the data that will be 
+			  downloaded. Before running this script, add 
+			  your UCAR password to the environment flag 
+			  "pswd", and edit the script to fit your 
+			  data and workspace.
+	2.  After batchreq.sh is complete, the user will need to 
+	    navigate to their Dashboard and obtain the perl download 
+	    scripts for each request. Save the individual perl 
+	    scripts as "get_file.pl" to the respective variable 
+	    directories. The environment variable "pswd" should be 
+	    set to your UCAR password.
+	3.  batchdl.sh - This program downloads the data. Before 
+			 running this script, add your UCAR password 
+			 to the "RDAPSWD" variable, and edit the 
+			 script to fit your data and workspace.
+	4.  After the downloads have completed, navigate to your 
+	    Dashboad and delete the data. The user will then be ready 
+	    to repeat steps (1) - (4) to obtain additional data.
+	5.  convert_2_grib.sh - This program converts the version 2 
+				GRIB data to version 1 GRIB. Before 
+				running this script, edit the script 
+				to fit your data and workspace.
