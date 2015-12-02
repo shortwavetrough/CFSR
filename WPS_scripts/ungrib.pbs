@@ -1,0 +1,20 @@
+#!/bin/tcsh -f
+#PBS -N ungrib_sfc
+#PBS -q standard
+#PBS -A 
+#PBS -l select=1:ncpus=32:mpiprocs=1
+#PBS -l walltime=06:00:00
+#PBS -j oe
+
+cd $PBS_O_WORKDIR
+
+rm ungrib.log*
+rm ungrib_sfc.o*
+
+echo "ungrib.exe started: `date`"
+aprun -n 1 ./ungrib.exe > ungrib.sfc.yr_b
+echo "ungrib.exe ended: `date`"
+
+rm GRIBFILE.*
+mkdir -p i_dir/yr_b/
+mv 3D_* i_dir/yr_b/

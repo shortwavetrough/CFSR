@@ -1,0 +1,32 @@
+GRIB | Level| Level| Level| metgrid  |  metgrid | metgrid                                  |
+Code | Code |   1  |   2  | Name     |  Units   | Description                              |
+-----+------+------+------+----------+----------+------------------------------------------+
+   7 | 100  |   *  |      | HGT      | m        | Height                                   |
+  11 | 100  |   *  |      | TT       | K        | Temperature                              |
+  33 | 100  |   *  |      | UU       | m s-1    | U                                        |
+  34 | 100  |   *  |      | VV       | m s-1    | V                                        |
+  52 | 100  |   *  |      | RH       | %        | Relative Humidity                        |
+  33 | 105  |  10  |      | UU       | m s-1    | U                                        | At 10 m
+  34 | 105  |  10  |      | VV       | m s-1    | V                                        | At 10 m
+  11 | 105  |   2  |      | TT       | K        | Temperature                              | At 2 m
+  52 | 105  |   2  |      | RH       | %        | Relative Humidity                        | At 2 m
+   1 |   1  |   0  |      | PSFC     | Pa       | Surface Pressure                         |
+   2 | 102  |   0  |      | PMSL     | Pa       | Sea-level Pressure                       |
+ 144 | 112  |   0  |  10  | SM000010 | fraction | Soil Moist 0-10 cm below grn layer (Up)  |
+ 144 | 112  |  10  |  40  | SM010040 | fraction | Soil Moist 10-40 cm below grn layer      |
+ 144 | 112  |  40  | 100  | SM040100 | fraction | Soil Moist 40-100 cm below grn layer     |
+ 144 | 112  | 100  | 200  | SM100200 | fraction | Soil Moist 100-200 cm below grn layer    |
+  11 | 112  |   0  |  10  | ST000010 | fraction | T 0-10 cm below ground layer (Upper)     |
+  11 | 112  |  10  |  40  | ST010040 | fraction | T 10-40 cm below ground layer (Upper)    |
+  11 | 112  |  40  | 100  | ST040100 | fraction | T 40-100 cm below ground layer (Upper)   |
+  11 | 112  | 100  | 200  | ST100200 | fraction | T 100-200 cm below ground layer (Bottom) |
+  91 |   1  |   0  |      | SEAICE   | proprtn  | Ice flag                                 |
+  81 |   1  |   0  |      | LANDSEA  | proprtn  | Land/Sea flag (1=land, 0 or 2=sea)       |
+   7 |   1  |   0  |      | SOILHGT  | m        | Terrain field of source analysis         |
+  11 |   1  |   0  |      | SKINTEMP | K        | Skin temperature (can use for SST also)  |
+  65 |   1  |   0  |      | SNOW     | kg m-2   | Water equivalent snow depth              |
+-----+------+------+------+----------+----------+------------------------------------------+
+#
+#  Grib codes are from Table 128 
+#  http://www.ecmwf.int/products/data/technical/GRIB_tables/table_128.html
+#  

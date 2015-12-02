@@ -1,0 +1,38 @@
+&share
+ wrf_core = 'ARW',
+ max_dom = 1,
+ start_date = 'yr_b-01-01_00:00:00'
+ end_date   = 'yr_e-01-01_00:00:00'
+ interval_seconds = 21600
+ io_form_geogrid = 2,
+/
+
+&geogrid
+ parent_id         =   1,   1,
+ parent_grid_ratio =   1,   3,
+ i_parent_start    =   1,  31,
+ j_parent_start    =   1,  17,
+ e_we              = 276, 112,
+ e_sn              = 206,  97,
+ geog_data_res     = '10m','2m',
+ dx = 50000,
+ dy = 50000,
+ map_proj = 'polar',
+ ref_lat   =  80.50001,
+ ref_lon   = -160.0,
+ truelat1  =  80.5,
+ truelat2  =  1.e+20,
+ stand_lon = -114.0,
+ geog_data_path = 'g_dir/geog'
+/
+
+&ungrib
+ out_format = 'WPS',
+ prefix = 'w_dir/3D_PL',
+/
+
+&metgrid
+! fg_name = '3D_SFC',
+! io_form_metgrid = 2, 
+! opt_output_from_metgrid_path = './',
+/
