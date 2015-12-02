@@ -37,6 +37,7 @@ CFSR Request, Download, and Pre-Processing Program
 
 How to use this program:
 
+scripts/
         1.  batchreq.sh - This program requests the data that will be 
 			  downloaded. Before running this script, add 
 			  your UCAR password to the environment flag 
@@ -59,3 +60,60 @@ How to use this program:
 				GRIB data to version 1 GRIB. Before 
 				running this script, edit the script 
 				to fit your data and workspace.
+
+WPS_scripts/
+	The namelists are from WPS version 3.2, and it is assumed the 
+	user is using this version. The shell scripts should be 1 
+	directory up from the WPS/ directory. The namelist files, 
+	pbs files, and Vtable file should reside in the WPS/ 
+	directory. The geo_em.d01.nc NetCDF file should reside in 
+	WPS/geog/ directory.
+	1.  runungrib.csh - This program runs ungrib for a period of 
+			    time specified by the user. Before running 
+			    this program, edit the script to fit your 
+			    workspace.
+	2.  runmetgrid.csh - This program runs metgrid for a period of 
+			     time specified by the user. Before 
+			     running this program, edit the script to 
+			     fit your workspace.
+	3.  ungrib.pbs - This script defines the commands used for 
+			 Ungrib. Before running runungrib.csh, edit 
+			 the script by adding in the queue to use, job 
+			 number, and memory and cpu usage.
+	4.  metgrid.pbs - This script defines the commands used for 
+			  Metgrid. Before running runmetgrid.csh, edit 
+			  the script by adding in the queue to use, 
+			  job number, and memory and cpu usage.
+	5.  namelist.wps.[SFC,PL] - Namelist information Ungrib will 
+				    use for surface and pressure level 
+				    variables.
+	6.  namelist.wps.STD - Namelist information Metgrid will use.
+	7.  Vtable - Variables to unpack from CFSR GRIB (version 1).
+	8.  geo_em.d01.nc - Output from Geogrid defining the model 
+			    domain.
+
+noleap/
+	1.  mod_metem.ncl - At this time RASM does not use leap days, 
+			    so this program replaces the leap day data 
+			    with data from March 01. This allows for 
+			    correct calculation of tendencies 
+			    performed by real.exe. This program must 
+			    be run for all leap years, and before 
+			    running real.exe.
+	2.  mod_wrf[bdy,fdda].ncl - These programs remove the leap day 
+				    from the lateral boundary and 
+				    spectral nudging files. Run these 
+				    after real.exe completes.
+
+real_scripts/
+	1.  runreal.CFSR.csh - This program sets up the namelist and 
+			       PBS script needed to run real.exe. This 
+			       program assumes the directory 
+			       containing WRF is named "WRFV3_single." 
+			       Before running, edit this program to 
+			       fit your data and workspace.
+	2.  real.CFSR.pbs - This script defines the commands used for 
+			    real.exe. Before running runreal.CFSR.csh, 
+			    edit the script to fit your workspace.
+	3.  namelist.input.racm_input - Namelist information real.exe 
+					will use.

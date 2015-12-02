@@ -1,0 +1,177 @@
+! WRF namelist for creating RACM input data with WRF 3.2 and spectral nuding.
+! This namelist is used to run real over and over again and create the 
+! lateral boundar conditions for RACM.  Sed is used to adjust start /stop times.
+
+ &time_control
+ start_year                          = st_y,
+ start_month                         = st_m,
+ start_day                           = st_d,
+ start_hour                          = 00,
+ start_minute                        = 00,
+ start_second                        = 00,
+ end_year                            = en_y,
+ end_month                           = en_m,
+ end_day                             = en_d,
+ end_hour                            = 00,
+ end_minute                          = 00,
+ end_second                          = 00,
+ interval_seconds                    = 21600
+ input_from_file                     = .true.,
+ history_interval                    = 180,
+ frames_per_outfile                  = 1,
+ restart                             = .false.,
+ restart_interval                    = 1440,
+ io_form_history                     = 2
+ io_form_restart                     = 2
+ io_form_input                       = 2
+ io_form_boundary                    = 2
+ debug_level                         = 0
+ auxinput4_inname                    = "wrflowinp_d<domain>",
+ auxinput4_interval                  = 360,
+ io_form_auxinput4                   = 2,
+ /
+
+ &domains
+ time_step                           = 150,
+ time_step_fract_num                 = 0,
+ time_step_fract_den                 = 1,
+ max_dom                             = 1,
+ s_we                                = 1,
+ e_we                                = 276,
+ s_sn                                = 1,
+ e_sn                                = 206,
+ s_vert                              = 1,
+ e_vert                              = 40,
+ eta_levels                          =  1.00000, 0.99667, 0.99268, 0.98738, 0.98077,
+                                        0.97223, 0.96179, 0.94884, 0.93346, 0.91447,
+                                        0.89203, 0.86633, 0.83640, 0.80141, 0.76188,
+                                        0.71838, 0.67156, 0.62208, 0.57068, 0.51720,
+                                        0.46214, 0.40769, 0.35800, 0.31274, 0.27161,
+                                        0.23431, 0.20056, 0.17106, 0.14553, 0.12291,
+                                        0.10287, 0.08512, 0.06940, 0.05547, 0.04313,
+                                        0.03220, 0.02251, 0.01394, 0.00634, 0.00000,
+ p_top_requested		     = 5000,
+ num_metgrid_levels                  = 33,
+ num_metgrid_soil_levels	     = 4,
+ dx                                  = 50000,
+ dy                                  = 50000,
+ grid_id                             = 1,
+ parent_id                           = 0,
+ i_parent_start                      = 1,
+ j_parent_start                      = 1,
+ parent_grid_ratio                   = 1,
+ parent_time_step_ratio              = 1,
+ feedback                            = 0,
+ nproc_x                             = -1,
+ nproc_y                             = -1,
+ smooth_option                       = 0
+ /
+
+ &physics
+ mp_physics                          = 7,
+ gsfcgce_hail			     = 0,
+ gsfcgce_2ice			     = 0,
+ co2tf				     = 1,
+ ra_lw_physics                       = 3,
+ ra_sw_physics                       = 3,
+ radt                                = 10,
+ sf_sfclay_physics                   = 1,
+ bl_pbl_physics                      = 1,
+ sf_surface_physics                  = 2,
+ bldt                                = 0,
+ cu_physics                          = 3,
+ cudt                                = 5,
+ isfflx                              = 1,
+ ifsnow                              = 0,
+ icloud                              = 1,
+ surface_input_source                = 1,
+ num_soil_layers                     = 4,
+ pxlsm_smois_init		     = 1,
+ usemonalb			     = .false.
+ fractional_seaice		     = 1
+ sf_urban_physics                    = 0,
+ mp_zero_out                         = 0,
+ maxiens                             = 1,
+ maxens                              = 3,
+ maxens2                             = 3,
+ maxens3                             = 16,
+ ensdim                              = 144,
+ slope_rad                           = 0,
+ topo_shading                        = 0,
+ cam_abs_freq_s                      = 21600
+ cam_abs_dim2                        = 40
+ cam_abs_dim1                        = 4
+ paerlev                             = 29
+ levsiz                              = 59
+ sst_update                          = 1
+ /
+
+ &fdda
+ grid_fdda                           = 2,
+ gfdda_inname                        = "wrffdda_d<domain>",
+ gfdda_interval_m                    = 360,
+ grid_sfdda                          = 0,
+ sgfdda_interval_m                   = 0,
+ sgfdda_end_h                        = 0,
+ fgdt                                = 0,
+ gfdda_end_h                         = 10000,
+ if_no_pbl_nudging_uv                = 0,
+ if_no_pbl_nudging_t                 = 0,
+ if_no_pbl_nudging_ph                = 0,
+ if_zfac_uv                          = 1,
+ if_zfac_t                           = 1,
+ if_zfac_ph                          = 1,
+ k_zfac_uv                           = 20,
+ k_zfac_t                            = 20,
+ k_zfac_ph                           = 50,
+ guv                                 = 0.0003,
+ gt                                  = 0.0003,
+ gph                                 = 0.0003,
+ dk_zfac_uv                          = 30
+ dk_zfac_t                           = 30
+ dk_zfac_ph                          = 30
+ xwavenum                            = 2,
+ ywavenum                            = 2,
+ /
+
+ &dynamics
+ rk_ord	                             = 3,
+ diff_opt                            = 1,
+ km_opt                              = 4,
+ diff_6th_opt                        = 0,
+ diff_6th_factor                     = 0.12,
+ w_damping                           = 1,
+ base_temp                           = 268.
+ damp_opt                            = 0,
+ zdamp                               = 5000.,
+ dampcoef                            = 0.01,
+ khdif                               = 0,
+ kvdif                               = 0,
+ smdiv				     = 0.1,
+ emdiv				     = 0.01,
+ epssm				     = 0.1,
+ non_hydrostatic                     = .true.,
+ h_mom_adv_order                     = 5,
+ v_mom_adv_order                     = 3,
+ h_sca_adv_order                     = 5,
+ v_sca_adv_order                     = 3,
+ time_step_sound                     = 4,
+ moist_adv_opt                       = 1,
+ scalar_adv_opt                      = 1,
+ /
+
+ &bdy_control
+ spec_bdy_width                      = 5,
+ spec_zone                           = 1,
+ relax_zone                          = 4,
+ specified                           = .true.,
+ nested                              = .false.,
+ /
+
+ &grib2
+ /
+
+ &namelist_quilt
+ nio_tasks_per_group = 0,
+ nio_groups = 1,
+ /

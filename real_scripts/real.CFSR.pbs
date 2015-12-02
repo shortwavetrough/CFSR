@@ -1,0 +1,37 @@
+#!/bin/tcsh -f
+#PBS -N realCFSst_yst_m
+#PBS -q standard
+#PBS -A 
+#PBS -l select=1:ncpus=32:mpiprocs=32
+#PBS -l walltime=0:30:00
+#PBS -j oe
+
+cd $PBS_O_WORKDIR
+
+### Remove any existing rsl.out.* and rsl.error.* files
+echo 'Removing any existing rsl.error and rsl.out files'
+
+rm rsl.*.*
+rm real.pbs.o*
+rm wrf.pbs.o*
+rm wrfbdy_*
+rm wrfinput_*
+rm wrflowinp_*
+rm wrffdda_*
+
+cp ../sim_name_namelist.input namelist.input
+
+ln -s $WORKDIR/WRF_data/CFSR/metgrid/st_y/met_em.d01.????-st_m* .
+ln -s $WORKDIR/WRF_data/CFSR/metgrid/st_y/met_em.d01.????-en_m* .
+
+echo "real.exe started: `date`"
+aprun -n 32 ./real.exe
+echo "real.exe ended: `date`"
+
+mv wrfbdy_d01 $WORKDIR/WRF_data/boundary/CFSR/wrfbdy_d01_st_yst_m01
+mv wrffdda_d01 $WORKDIR/WRF_data/boundary/CFSR/wrffdda_d01_st_yst_m01
+mv wrfinput_d01 $WORKDIR/WRF_data/boundary/CFSR/wrfinput_d01_st_yst_m01
+# lower boundary not needed / wanted for RACM!
+rm wrflowinp_d01
+rm met_em.d01*
+
