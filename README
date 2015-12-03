@@ -116,3 +116,21 @@ real_scripts/
 			    script to fit your workspace.
 	3.  namelist.input.racm_input - Namelist information real.exe 
 					will use.
+
+conf_scripts/
+	WRF must be compiled before WPS. The configuration scripts 
+	are architecture dependent and will likely not work on other 
+	machines. The JasPer, PNG, and Zlib libraries are only needed 
+	for GRIB version 2 support. It is strongly recommended to not 
+	use GRIB version 2 data! Native WPS 3.2.x does not support 
+	version 2 GRIB files.
+	1.  configure.wrf - WRF configuration script. The user may 
+			    need to edit the architecture settings to 
+			    the respective compiler details of the 
+			    system WRF will be compiled on.
+	2.  configure.wps - WPS configuration script. The user may 
+			    need to edit "COMPRESSION_LIBS", 
+			    "COMPRESSION_INC", "NCARG_LIBS", 
+			    "WRF_DIR", and architecture settings to 
+			    the respective paths and compiler details 
+			    of the system WPS will be compiled on.
